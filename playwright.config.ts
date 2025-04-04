@@ -21,6 +21,7 @@ export default defineConfig({
   ],
   // Configure HTML reporter
   reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }] 
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['allure-playwright'],
   ],
 })

@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","0","Should disable submit button when any field is cleared and check field is mandatory","chromium","Fri Apr 04 14:56:01 CEST 2025","skipped","Fri Apr 04 14:56:01 CEST 2025","Sign Up form tests","tests\signUp\signUp.test.ts","",""
+"","9","localStorage","chromium","Fri Apr 04 14:56:01 CEST 2025","passed","Fri Apr 04 14:56:01 CEST 2025","","tests\signUp\signUp.test.ts","",""
+"","4","Sign up a new user and successful log in","chromium","Fri Apr 04 14:56:01 CEST 2025","failed","Fri Apr 04 14:56:01 CEST 2025","Sign Up form tests","tests\signUp\signUp.test.ts","",""
+"","9","localStorage","setup","Fri Apr 04 14:56:00 CEST 2025","passed","Fri Apr 04 14:56:00 CEST 2025","","test-setup\localStorage.setup.ts","",""
