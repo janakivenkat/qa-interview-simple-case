@@ -29,7 +29,7 @@ test.describe('Sign Up form tests', () => {
   });
 
   // sign up with new user and verify successfull log in 
-  test('Sign up a new user and verify successful log in', async ({ page }) => {
+  test('Sign up with new user and verify successful log in', async ({ page }) => {
     // Get the user data for the first user (index 1) from localStorage
     const existingUser = await getUserDataFromLocalStorage(page, 1)
     // Fill in the sign-up form (replace with actual form fields)

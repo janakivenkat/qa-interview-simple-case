@@ -37,7 +37,7 @@ test.describe('Login form tests', () => {
   })
 
   //Verify error message while logging in with invalid credentials
-  test('should show an error message with invalid credentials', async () => {
+  test('Log in with invalid credentials', async () => {
     //enter invalid credentials
     const invalidUser = { email: 'invalid@mail.com', password: 'wrongPassword' }
     await loginPage.login(invalidUser.email, invalidUser.password)
