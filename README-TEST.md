@@ -82,9 +82,5 @@ npm install -g allure-commandline --save-dev
 4. Execute the test
 5. Generate Allure Reports
 ```bash
-npx allure generate allure-results --clean -o allure-report
-```
-6. Open Allure Report
-```bash
-npx allure open allure-report
+npm run allurereport
 ```
