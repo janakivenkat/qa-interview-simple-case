@@ -51,15 +51,23 @@ npx playwright test tests/signUp/signUp.test.ts --headed
 ## Folder Structure
 
 ```
-/pages
-  - loginPage.ts     // objects and functions for login page
-  - signUpFormPage.ts     // Objects and functions for sign up form page
-
 /tests
-  /login
-    - login.test.ts   // Happy path and a commented error path test cases
-  /signUp
-    - signUp.test.ts  // Happy path , field validation and a commented error path test cases
+  /test-scripts
+    /login
+      - login.test.ts   // Happy path and error path test cases
+    /signUp
+      - signUp.test.ts  // Happy path , field validation and a commented error path test cases
+  /pages
+    - loginPage.ts     // objects and functions for login page
+    - signUpFormPage.ts     // Objects and functions for sign up form page
+  /utils
+    -helper.ts // contains common functions
+/playwright-report
+  -index.html   // Contains playwright report
+/allure-report  //external report
+/allure-results
+/README-TEST.md   // Contains additional test related informations
+
 
 ```
 ## ALLURE REPORTS (ADD-ONS)

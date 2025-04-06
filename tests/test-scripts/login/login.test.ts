@@ -36,12 +36,11 @@ test.describe('Login form tests', () => {
     await loginPage.isLoggedIn(existingUser.firstName, existingUser.lastName)
   })
 
-  //Note: Do not uncomment it as the test fails due to missing function and objects
-  /*test('should show an error message with invalid credentials', async () => {
+  //Verify error message while logging in with invalid credentials
+  test('should show an error message with invalid credentials', async () => {
     //enter invalid credentials
-    await loginPage.login('invalid@mail.com', 'wrongPassword!')
-    //verify the error message
-    const errorMessage = await loginPage.getErrorMessage()
-    expect(errorMessage).toBe('Invalid email or password')
-  })*/
+    const invalidUser = { email: 'invalid@mail.com', password: 'wrongPassword' }
+    await loginPage.login(invalidUser.email, invalidUser.password)
+    await loginPage.isErrorMessageVisible()
+  })
 })

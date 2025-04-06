@@ -1,37 +1,50 @@
 // pages/signUpPage.ts
-import { Page, expect } from '@playwright/test'
+import { Page, expect, Locator } from '@playwright/test'
 
 export class SignUpPage {
-  constructor(private page: Page) {}
+  private page: Page;
 
-  // Locators for sign-up page elements
-  private firstNameInput = 'input[id="firstName"]'
-  private lastNameInput = 'input[id="lastName"]'
-  private emailInput = 'input[id="email"]'
-  private passwordInput = 'input[id="password"]'
-  private submitButton = 'button.MuiButton-containedPrimary.MuiButton-sizeMedium'
- 
+  // Locators for the Login Page
+  private firstNameInput: Locator
+  private lastNameInput: Locator
+  private emailField: Locator
+  private passwordField: Locator
+  private submitButton: Locator
+
+  constructor(page: Page) {
+    this.page = page
+
+    // Initialize locators
+    this.firstNameInput = page.locator('[id="firstName"]')
+    this.lastNameInput = page.locator('[id="lastName"]')
+    this.emailField = page.locator('[id="email"]')
+    this.passwordField = page.locator('[id="password"]')
+    this.submitButton = page.locator('button.MuiButton-containedPrimary.MuiButton-sizeMedium')
+
+  }
+
+
   // Method to fill the sign-up form and submit
   async signUp(firstName: string, lastName: string, email: string, password: string) {
-    await expect(this.page.locator(this.emailInput)).toBeVisible()
-    await this.page.fill(this.firstNameInput, firstName)
-    await expect(this.page.locator(this.emailInput)).toBeVisible()
-    await this.page.fill(this.lastNameInput, lastName)
-    await expect(this.page.locator(this.emailInput)).toBeVisible()
-    await this.page.fill(this.emailInput, email)
-    await expect(this.page.locator(this.passwordInput)).toBeVisible()
-    await this.page.fill(this.passwordInput, password)
+    await expect(this.firstNameInput).toBeVisible()
+    await this.firstNameInput.fill(firstName)
+    await expect(this.lastNameInput).toBeVisible()
+    await this.lastNameInput.fill(lastName)
+    await expect(this.emailField).toBeVisible()
+    await this.emailField.fill(email)
+    await expect(this.passwordField).toBeVisible()
+    await this.passwordField.fill(password)
   }
 
   // Method to click submit button
   async clickSubmitButton() {
-    await expect(this.page.locator(this.submitButton)).not.toBeDisabled()
-    await this.page.click(this.submitButton)
+    await expect(this.submitButton).not.toBeDisabled()
+    await this.submitButton.click()
   }
 
   // Method to verify submit button is enabled
   async isSubmitButtonEnabled(): Promise<boolean> {
-    const submitButtonCheck = this.page.locator(this.submitButton)
+    const submitButtonCheck = this.submitButton
     return await submitButtonCheck.isEnabled()
   }
 }

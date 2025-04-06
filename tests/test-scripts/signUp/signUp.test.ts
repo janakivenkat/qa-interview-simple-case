@@ -39,7 +39,7 @@ test.describe('Sign Up form tests', () => {
     await loginPage.isLoggedIn(existingUser.firstName, existingUser.lastName)
   })
 
-  /*//sign up with existing user and verify the error message
+  /*//sign up with existing user and verify the error message DO NOT UNCOMMENT AS THE FUNCTIONALITY FAILS IN APPLICATION
   test('should show error for existing email', async () => {
     // Get the user data for the first user (index 2) from localStorage
     const existingUser = await getUserDataFromLocalStorage(page, 1)
@@ -49,7 +49,7 @@ test.describe('Sign Up form tests', () => {
   })*/
 
   //verify mandatory field and length validation of each fields
-  test('Should disable submit button when any field is cleared and check field is mandatory', async ({ page }) => {
+  test('Verify field validations and mandatory field check', async ({ page }) => {
     // Get the user data for the first user (index 2) from localStorage
     const existingUser = await getUserDataFromLocalStorage(page, 2)
     // Fill in the sign-up form with valid data
