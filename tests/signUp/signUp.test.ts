@@ -9,9 +9,9 @@ Last Modified Description : NA
 ***********************************************************************/
 
 import { test, expect } from '@playwright/test'
-import { existingUsers } from '../../test-setup/localstorage.setup'
 import { SignUpPage } from '../../pages/signUpFormPage'
 import { LoginPage } from '../../pages/loginPage'
+import { getUserDataFromLocalStorage } from '../../utils/helper'
 
 test.describe.configure({ mode: 'serial' })
 
@@ -28,25 +28,27 @@ test.describe('Sign Up form tests', () => {
   });
 
   // sign up with new user and verify successfull log in 
-  test('Sign up a new user and successful log in', async () => {
+  test('Sign up a new user and successful log in', async ({ page }) => {
+    // Get the user data for the first user (index 1) from localStorage
+    const existingUser = await getUserDataFromLocalStorage(page, 1)
     // Fill in the sign-up form (replace with actual form fields)
-    const existingUser = existingUsers[1]
-    await signUpFormPage.signUp(existingUser.firstName,existingUser.lastName,existingUser.email, existingUser.password)
+    await signUpFormPage.signUp(existingUser.firstName, existingUser.lastName, existingUser.email, existingUser.password)
     await signUpFormPage.clickSubmitButton()
     //verify successful login by validating the welcome message
-    await loginPage.isLoggedIn(existingUser.firstName,existingUser.lastName)
+    await loginPage.isLoggedIn(existingUser.firstName, existingUser.lastName)
   })
 
   //verify mandatory field and length validation of each fields
-  test('Should disable submit button when any field is cleared and check field is mandatory', async ({page}) => {
-    const existingUser = existingUsers[2]
+  test('Should disable submit button when any field is cleared and check field is mandatory', async ({ page }) => {
+    // Get the user data for the first user (index 2) from localStorage
+    const existingUser = await getUserDataFromLocalStorage(page, 2)
     // Fill in the sign-up form with valid data
-    await signUpFormPage.signUp(existingUser.firstName,existingUser.lastName,existingUser.email,existingUser.password)
+    await signUpFormPage.signUp(existingUser.firstName, existingUser.lastName, existingUser.email, existingUser.password)
 
     // Initially, the submit button should be enabled
     const isButtonEnabled = await signUpFormPage.isSubmitButtonEnabled()
     expect(isButtonEnabled).toBe(true)
-   
+
     // Array of field selectors to test
     const fieldSelectors = [
       { selector: '#firstName', name: 'First Name', minLength: 1, validate: (value: string) => value.length >= 1 },
@@ -61,7 +63,7 @@ test.describe('Sign Up form tests', () => {
       await page.fill(selector, '')
 
       // Verify that the submit button is disabled after clearing the field
-       expect(await signUpFormPage.isSubmitButtonEnabled()).toBe(false)
+      expect(await signUpFormPage.isSubmitButtonEnabled()).toBe(false)
 
       // Refill the field with the original value to test the next field
       switch (selector) {
@@ -82,7 +84,7 @@ test.describe('Sign Up form tests', () => {
       // Check if the field has the minimum length or meets the validation
       const fieldValue = await page.inputValue(selector)
       // Ensure that the field validation passes
-      expect(validate(fieldValue)).toBe(true) 
+      expect(validate(fieldValue)).toBe(true)
 
       // Ensure the submit button is re-enabled after refilling the field
       expect(await signUpFormPage.isSubmitButtonEnabled()).toBe(true)
