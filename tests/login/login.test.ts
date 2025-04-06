@@ -20,7 +20,8 @@ test.describe('Login form tests', () => {
   //Before hook to navigate to the login page
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    await page.goto('http://localhost:8080/login')
+    await page.goto('/login')
+    await loginPage.verifyLandingPage('Login')
   });
 
   //Log in with valid credentials

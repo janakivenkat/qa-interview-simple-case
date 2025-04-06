@@ -12,6 +12,7 @@ export default defineConfig({
       testDir: './tests/',
       use: {
         ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:8080',
         // Use "database" with existing accounts
         storageState: setupFile,
         screenshot: 'only-on-failure',

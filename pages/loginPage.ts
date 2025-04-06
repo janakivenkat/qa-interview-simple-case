@@ -9,6 +9,7 @@ export class LoginPage {
   private passwordInput = 'input[id="password"]'
   private submitButton = 'button.MuiButton-containedPrimary.MuiButton-sizeMedium'
   private welcomeMessage = '#root >> div'
+  private title = 'h2'
 
   // Method to log in
   async login(email: string, password: string) {
@@ -18,6 +19,12 @@ export class LoginPage {
     await this.page.fill(this.passwordInput, password)
     await expect(this.page.locator(this.submitButton)).not.toBeDisabled()
     await this.page.click(this.submitButton)
+  }
+
+  //Method to verify landing page text
+  async verifyLandingPage(landingText: string) {
+    await expect(this.page.locator(this.title)).toBeVisible()
+    await expect(this.page.locator(this.title)).toHaveText(landingText)
   }
 
   // Method to check for welcome message

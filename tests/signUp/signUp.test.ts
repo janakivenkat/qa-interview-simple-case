@@ -24,11 +24,12 @@ test.describe('Sign Up form tests', () => {
   test.beforeEach(async ({ page }) => {
     signUpFormPage = new SignUpPage(page)
     loginPage = new LoginPage(page)
-    await page.goto('http://localhost:8080/signup')
+    await page.goto('/signup')
+    await loginPage.verifyLandingPage('Become a member')
   });
 
   // sign up with new user and verify successfull log in 
-  test('Sign up a new user and successful log in', async ({ page }) => {
+  test('Sign up a new user and verify successful log in', async ({ page }) => {
     // Get the user data for the first user (index 1) from localStorage
     const existingUser = await getUserDataFromLocalStorage(page, 1)
     // Fill in the sign-up form (replace with actual form fields)
@@ -37,6 +38,15 @@ test.describe('Sign Up form tests', () => {
     //verify successful login by validating the welcome message
     await loginPage.isLoggedIn(existingUser.firstName, existingUser.lastName)
   })
+
+  /*//sign up with existing user and verify the error message
+  test('should show error for existing email', async () => {
+    // Get the user data for the first user (index 2) from localStorage
+    const existingUser = await getUserDataFromLocalStorage(page, 1)
+    await signUpFormPage.signUp(existingUser.firstName, existingUser.lastName, existingUser.email, existingUser.password)
+    const errorMessage = await signUpFormPage.getErrorMessage()
+    expect(errorMessage).toBe('Email already exists')
+  })*/
 
   //verify mandatory field and length validation of each fields
   test('Should disable submit button when any field is cleared and check field is mandatory', async ({ page }) => {
