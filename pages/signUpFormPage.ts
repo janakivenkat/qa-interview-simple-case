@@ -1,17 +1,16 @@
 // pages/signUpPage.ts
-import { Page, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test'
 
 export class SignUpPage {
   constructor(private page: Page) {}
 
   // Locators for sign-up page elements
-  private firstNameInput = 'input[id="firstName"]';
-  private lastNameInput = 'input[id="lastName"]';
-  private emailInput = 'input[id="email"]';
-  private passwordInput = 'input[id="password"]';
-  private submitButton = 'button.MuiButton-containedPrimary.MuiButton-sizeMedium';
-  //const button = page.locator('button.MuiButton-containedPrimary.MuiButton-sizeMedium')
-
+  private firstNameInput = 'input[id="firstName"]'
+  private lastNameInput = 'input[id="lastName"]'
+  private emailInput = 'input[id="email"]'
+  private passwordInput = 'input[id="password"]'
+  private submitButton = 'button.MuiButton-containedPrimary.MuiButton-sizeMedium'
+ 
   // Method to fill the sign-up form and submit
   async signUp(firstName: string, lastName: string, email: string, password: string) {
     await expect(this.page.locator(this.emailInput)).toBeVisible()
@@ -24,11 +23,13 @@ export class SignUpPage {
     await this.page.fill(this.passwordInput, password)
   }
 
+  // Method to click submit button
   async clickSubmitButton() {
     await expect(this.page.locator(this.submitButton)).not.toBeDisabled()
     await this.page.click(this.submitButton)
   }
 
+  // Method to verify submit button is enabled
   async isSubmitButtonEnabled(): Promise<boolean> {
     const submitButtonCheck = this.page.locator(this.submitButton)
     return await submitButtonCheck.isEnabled()

@@ -26,6 +26,6 @@ export class LoginPage {
     await expect(this.page.getByText('Log out')).toBeVisible()
     
     // Verify welcome message
-    expect(this.page.locator(this.welcomeMessage)).toHaveText(`Welcome ${firstName} ${lastName}`);
+    expect(this.page.locator(this.welcomeMessage)).toHaveText(`Welcome ${firstName} ${lastName}`)
   }
 }
